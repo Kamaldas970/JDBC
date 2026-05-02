@@ -1,0 +1,48 @@
+package com.telusko.JDBCLearning;
+import java.sql.*;
+
+public class ApplicationTODatabase2 {
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException
+	{
+		// TODO Auto-generated method stub
+		
+		//Load and Register driver
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+		String url="jdbc:mysql://localhost:3306/student";
+		String username="root";
+		String password="9705098991";
+		
+		Connection connect=DriverManager.getConnection(url, username, password);
+		
+		//create the statement
+		
+		Statement statement=connect.createStatement();
+		
+		
+		//execute query
+		String sql="UPDATE s_info set sage=50 where sid=3";
+		
+		int rowAffected=statement.executeUpdate(sql);
+		//process the result
+		
+		if(rowAffected==0) {
+			System.out.println("UPDATE is failed");
+		}
+		else {
+			System.out.println("updated successfully");
+		}
+		
+		//close the resources
+		
+		connect.close();
+		statement.close();
+		
+		
+		
+
+	}
+
+}
