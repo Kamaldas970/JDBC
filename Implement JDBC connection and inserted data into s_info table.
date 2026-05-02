@@ -1,0 +1,42 @@
+package com.telusko.JDBCLearning;
+import java.sql.*;
+
+public class ApplicationTODataBase {
+	public static void main(String[] args) throws SQLException, ClassNotFoundException 
+	{
+		//Load and Register driver
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+		//Establish the Connection
+		String url="jdbc:mysql://localhost:3306/student";
+		String userName="root";
+		String password="9705098991";
+		
+		 Connection connect=DriverManager.getConnection(url, userName, password);
+		 
+		//Create statement
+		 Statement statement=connect.createStatement();
+		 
+		 //Execute the query
+		 
+		 String sql="INSERT INTO s_info(sid, sname,sage, scity) " + "VALUES(5,'laxman', 45, 'Nanded')";
+		 int rowAffected=statement.executeUpdate(sql);
+		 
+		 //process the result
+		 
+		 if(rowAffected==0) {
+			 System.out.println("Unable to insert data into table");
+		 }
+		 else {
+			 System.out.println("Data inserted successfully");
+		 }
+		 
+		 //Close the connections
+		 
+		 connect.close();
+		 statement.close();
+		 
+	}
+
+}
