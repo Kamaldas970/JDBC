@@ -1,0 +1,24 @@
+package com.telusko.JDBCLearning;
+
+public class LaunchClassforName {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		demo d= new demo();
+		
+
+	}
+
+}
+
+class demo{
+	
+	static {
+		System.out.println("Static");
+	}
+	
+	{
+		System.out.println("Instance---> Non-static");
+	}
+}
+
