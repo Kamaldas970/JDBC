@@ -1,0 +1,29 @@
+package com.telusko.JDBCLearning;
+import java.sql.*;
+public class FirstJDBCLearning {
+
+	
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException{
+		// TODO Auto-generated method stub
+		
+		//Load and Register the driver
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		String url=" jdbc:mysql://host:3306/JDBCLearning";
+		String user="root";
+		String password="9705098991";
+		
+		Connection Connect=DriverManager.getConnection(url, user, password);
+		//createStatemen
+		Statement statement=Connect.createStatement();
+		
+		//execute query
+		//process the result
+		
+		//Close the resources
+		Connect.close();
+		statement.close();
+
+	}
+
+}
