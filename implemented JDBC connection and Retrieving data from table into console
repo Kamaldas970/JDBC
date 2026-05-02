@@ -1,0 +1,40 @@
+package com.telusko.JDBCLearning;
+import java.sql.*;
+
+public class ApplicationTODatabase3 {
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		
+		//Load and Register Driver
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+		
+		String url="jdbc:mysql://localhost:3306/student";
+		String userName="root";
+		String password="9705098991";
+		Connection connect=DriverManager.getConnection(url, userName,  password);
+		
+		
+		//Create the statement
+		Statement statement=connect.createStatement();
+		
+		//Execute the query
+		
+		String sql="SELECT * FROM s_info ";
+		
+		ResultSet rs=statement.executeQuery(sql);
+		
+		//Process the result
+		
+		while(rs.next()) {
+			System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getInt(3) + " " + rs.getString(4));
+		}
+		
+		rs.close();
+		statement.close();
+		connect.close();
+	}
+
+}
