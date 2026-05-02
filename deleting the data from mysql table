@@ -1,0 +1,49 @@
+package com.telusko.JDBCLearning;
+
+import java.sql.*;
+
+
+public class ApplicationTODatabase4 {
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		
+		//Load and Register Driver
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+		//Establish the connection
+		
+		String url="jdbc:mysql://localhost:3306/student";
+		String userName="root";
+		String password="9705098991";
+		
+		Connection connect=DriverManager.getConnection(url, userName, password);
+		
+		//create the statement
+		
+		Statement statement=connect.createStatement();
+		
+		//execute query
+		
+		
+		String sql="DELETE FROM s_info where sid=3";
+		int rowAffected=statement.executeUpdate(sql);
+		
+		//process result
+		
+		if(rowAffected==0) {
+			System.out.println("DELETE FAIL");
+		}else {
+			System.out.println("Deleted Successfully");
+		}
+		//Close the resources
+		
+		connect.close();
+		statement.close();
+		
+		
+
+	}
+
+}
