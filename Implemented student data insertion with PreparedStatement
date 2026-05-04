@@ -1,0 +1,81 @@
+package com.telusko.JDBCLearning;
+import java.sql.*;
+import java.util.Scanner;
+
+
+
+public class prepareStatement {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Connection connect=null;
+		PreparedStatement pstmnt=null;
+		
+		try {
+			connect=JDBCutility.getConnection();
+			
+			String query="INSERT INTO s_info(sid, sname, sage, scity) VALUES(?, ?, ?, ?)";
+			pstmnt=connect.prepareStatement(query);
+			
+			System.out.println("Please Enter The Data To Be Insert");		
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enter the Student id");
+			Integer sid=sc.nextInt();
+			
+			System.out.println("Enter the Student  name");
+			String sname=sc.next();
+			
+			System.out.println("Enter the Student  age");
+			Integer sage=sc.nextInt();
+			
+			System.out.println("Enter the Student City");
+			String scity=sc.next();
+			
+			
+			
+			pstmnt.setInt(1, sid);
+			pstmnt.setString(2,sname);
+			pstmnt.setInt(3, sage);
+			pstmnt.setString(4, scity);
+			
+	
+			
+			System.out.println("Data inserted Successfully");
+			int rowAffected=pstmnt.executeUpdate();
+			if(rowAffected==0) {
+				System.out.println("Failed to Insert");
+			}
+			else {
+				System.out.println("Success to Insert");
+			}
+			
+		}
+		
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		finally {
+			try {
+				
+				JDBCutility.closeConnection(connect ,connect);
+				
+			}
+			
+			catch(SQLException e) {
+				e.printStackTrace();
+				
+			}
+		}
+		
+		
+		
+		
+		
+
+	}
+
+}
