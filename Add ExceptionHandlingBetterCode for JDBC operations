@@ -1,0 +1,69 @@
+package com.telusko.JDBCLearning;
+import java.sql.*;
+
+public class ExceptionHandlingBetterCode {
+
+	public static void main(String[] args) {
+		
+		Connection connect=null;
+		Statement statement=null;
+		
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			
+			String url="jdbc:mysql://localhost:3306/student";
+			String userName="root";
+			String password="9705098991";
+		
+				 connect=DriverManager.getConnection(url, userName, password);
+				
+				
+				 statement=connect.createStatement();
+				
+				
+				String sql="INSERT INTO s_info (sid, sname, sage, scity )" + "VALUES(7, 'sandesh', 24, 'Hyderabad')";
+				int rowAffected=statement.executeUpdate(sql);
+				
+				
+				if(rowAffected==0) {
+					System.out.println("Failed to Insert data");
+				}
+				else {
+					System.out.println("Success to insert the data");
+				}
+		}
+			
+		catch (SQLException e)
+		{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		 
+		
+		catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+		
+		try {
+			connect.close();
+			statement.close();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			
+		}
+		}
+		
+
+	}
+
+}
